@@ -1,41 +1,38 @@
 ﻿#include <iostream>
-
+#include <string>
 
 using namespace std;
 int main()
 {
-	cout << "Counting forward:\n";
-	for (auto i = 0; i < 10; i++)
+	string word1 = "Game";
+	string word2("Over");
+	string word3(3, '!');
+	string phrase = word1 + " " + word2 + word3;
+	cout << "The phrase is: " << phrase << "\n\n";
+	cout << "The phrase has: " << phrase.size() << " characters in it.\n\n";
+	cout << "The character at position 0 is: " << phrase[0] << "\n\n";
+	cout << "Changing the character at position 0.\n";
+	phrase[0] = 'L';
+	cout << "The phrase is now: " << phrase << "\n\n";
+	for (unsigned int i = 0; i < phrase.size(); i++)
 	{
-		cout << i << " ";
+		cout << "Character at position " << i << " is: " << phrase[i] << endl;
 	}
-	cout << "\n\nCounting backward:\n";
-	for (auto i = 9; i >= 0; i--)
+	cout << "\nThe sequence 'Over' begins at location ";
+	cout << phrase.find("Over") << endl;
+	if (phrase.find("eggplant") == string::npos)
 	{
-		cout << i << " ";
+		cout << "'eggplant' is not the phrase.\n\n";
 	}
-	cout << "\n\nCounting by fives:\n";
-	for (auto i = 0; i <= 50; i+=5)
+	phrase.erase(4, 5);
+	cout << "The phrase is now: " << phrase << endl;
+	phrase.erase(4);
+	cout << "The phrase is now: " << phrase << endl;
+	phrase.erase();
+	cout << "The phrase is now: " << phrase << endl;
+	if (phrase.empty())
 	{
-		cout << i << " ";
-	}
-	cout << "\n\nCounting forward:\n";
-	int count = 0;
-	for ( ; count < 10; )
-	{
-		cout << count << " ";
-		++count;
-	}
-	cout << "\n\nCounting with nested for loops:\n";
-	const int ROWS = 5;
-	const int COLUMS = 3;
-	for (auto i = 0; i < ROWS; i++)
-	{
-		for (auto j = 0; j < COLUMS; j++)
-		{
-			cout << i << "." << j << " ";
-		}
-		cout << endl;
+		cout << "\nThe phrase is no more.\n";
 	}
 	return 0;
 }
