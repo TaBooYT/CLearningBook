@@ -4,35 +4,39 @@
 using namespace std;
 int main()
 {
-	string word1 = "Game";
-	string word2("Over");
-	string word3(3, '!');
-	string phrase = word1 + " " + word2 + word3;
-	cout << "The phrase is: " << phrase << "\n\n";
-	cout << "The phrase has: " << phrase.size() << " characters in it.\n\n";
-	cout << "The character at position 0 is: " << phrase[0] << "\n\n";
-	cout << "Changing the character at position 0.\n";
-	phrase[0] = 'L';
-	cout << "The phrase is now: " << phrase << "\n\n";
-	for (unsigned int i = 0; i < phrase.size(); i++)
+	const int MAX_ITEMS = 10;
+	string inventory[MAX_ITEMS];
+	int numItems = 0;
+	inventory[numItems++] = "sword";
+	inventory[numItems++] = "armor";
+	inventory[numItems++] = "shield";
+	cout << "Your items: \n";
+	for (int i = 0; i < numItems; i++)
 	{
-		cout << "Character at position " << i << " is: " << phrase[i] << endl;
+		cout << inventory[i] << endl;
 	}
-	cout << "\nThe sequence 'Over' begins at location ";
-	cout << phrase.find("Over") << endl;
-	if (phrase.find("eggplant") == string::npos)
+	cout << "\nYou trade your sword for a battle axe.";
+	inventory[0] = "battle axe";
+	cout << "\nyour items:\n";
+	for (auto i = 0; i < numItems; i++)
 	{
-		cout << "'eggplant' is not the phrase.\n\n";
+		cout << inventory[i] << endl;
 	}
-	phrase.erase(4, 5);
-	cout << "The phrase is now: " << phrase << endl;
-	phrase.erase(4);
-	cout << "The phrase is now: " << phrase << endl;
-	phrase.erase();
-	cout << "The phrase is now: " << phrase << endl;
-	if (phrase.empty())
+	cout << "\nThe item name '" << inventory[0] << "' has ";
+	cout << inventory[0].size() << " letters in it.\n";
+	cout << "\nypu find a healding potion.";
+	if (numItems < MAX_ITEMS)
 	{
-		cout << "\nThe phrase is no more.\n";
+		inventory[numItems++] = "healing potion";
+	}
+	else
+	{
+		cout << "You have too many items and can't carry another.";
+	}
+	cout << "\nYour items:\n";
+	for (int i = 0; i < numItems; i++)
+	{
+		cout << inventory[i] << endl;
 	}
 	return 0;
 }
