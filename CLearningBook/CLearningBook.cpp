@@ -33,7 +33,7 @@ int main()
 	{
 		for (auto j = 0; j < COLUMS; j++)
 		{
-			cout << i << " ";
+			cout << i << "." << j << " ";
 		}
 		cout << endl;
 	}
