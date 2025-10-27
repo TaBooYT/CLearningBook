@@ -1,34 +1,74 @@
 ﻿#include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
+
 
 using namespace std;
 int main()
 {
-	const int ROWS = 3;
-	const int COLUMNS = 3;
-	char board[ROWS][COLUMNS] = { {'O', 'X', 'O'},
-								{' ', 'X', 'X'},
-								{'X', 'O', 'O'}, };
-	cout << "Here's the tic-tac-toe board:\n";
-	for (int i = 0; i < ROWS; i++)
+	enum fields {WORD, HINT, NUM_FIELDS};
+	const int NUM_WORDS = 5;
+	const string WORDS[NUM_WORDS][NUM_FIELDS] =
 	{
-		for (int j = 0; j < COLUMNS; j++)
-		{
-			cout << board[i][j];
-		}
-		cout << endl;
-	}
-	cout << "\n'X' moves to the empty location.\n\n";
-	board[1][0] = 'X';
-	cout << "Now the tic-tac-toe board is:\n";
-	for (int i = 0; i < ROWS; i++)
+		{"wall", "Do you feel you're banging your head against something?"},
+		{"glasses", "These might help you see the answer."},
+		{"lobored", "Going slowly, is it?"},
+		{"persistent", "Keep at it."},
+		{"jumble", "It's what the game ia all about."},
+	};
+
+	srand(static_cast<unsigned int>(time(0)));
+	int choice = (rand() % NUM_WORDS);
+	string theWord = WORDS[choice][WORD];
+	string theHint = WORDS[choice][HINT];
+
+	string jumble = theWord;
+	int length = jumble.size();
+	for (int i = 0; i < length; i++)
 	{
-		for (int j = 0; j < COLUMNS; j++)
-		{
-			cout << board[i][j];
-		}
-		cout << endl;
+		int index1 = rand() % length;
+		int index2 = rand() % length;
+		char temp = jumble[index1];
+		jumble[index1] = jumble[index2];
+		jumble[index2] = temp;
 	}
-	cout << "\n'X' wins!";
+
+	cout << "\t\t\tWelcome to Word Jumble!\n\n";
+	cout << "Unscramble the letters to make a word.\n";
+	cout << "Enter 'hint' for a hint.\n";
+	cout << "Enter 'quit' to quiet the game.\n\n";
+	cout << "The jumble is: " << jumble;
+	string guess;
+	cout << "\n\nYour guess: ";
+	cin >> guess;
+
+	while ((guess != theWord) && (guess != "quit"))
+	{
+		if (guess == "hint")
+		{
+			cout << "theHint";
+		}
+		else
+		{
+			cout << "Sorry, that's not it.";
+		}
+		cout << "\n\nYour guess: ";
+		cin >> guess;
+	}
+
+	if (guess == theWord)
+	{
+		cout << "\nThat's it! You guessed it!\n";
+	}
+	cout << "\nTHanks for playing.\n";
+
 	return 0;
 }
+
+
+
+/*
+d:
+cd \_CODEWARS\_projects\CLearningbook\git
+*/
