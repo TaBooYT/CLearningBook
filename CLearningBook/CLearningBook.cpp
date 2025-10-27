@@ -1,67 +1,47 @@
 ﻿#include <iostream>
 #include <string>
-#include <cstdlib>
-#include <ctime>
+#include <vector>
 
 
 using namespace std;
 int main()
 {
-	enum fields {WORD, HINT, NUM_FIELDS};
-	const int NUM_WORDS = 5;
-	const string WORDS[NUM_WORDS][NUM_FIELDS] =
+	vector<string> inventory;
+	inventory.push_back("sword");
+	inventory.push_back("armor");
+	inventory.push_back("shield");
+	cout << "You have " << inventory.size() << " items.\n";
+	cout << "\nYour items:\n";
+	for (unsigned int i = 0; i < inventory.size(); i++)
 	{
-		{"wall", "Do you feel you're banging your head against something?"},
-		{"glasses", "These might help you see the answer."},
-		{"lobored", "Going slowly, is it?"},
-		{"persistent", "Keep at it."},
-		{"jumble", "It's what the game ia all about."},
-	};
-
-	srand(static_cast<unsigned int>(time(0)));
-	int choice = (rand() % NUM_WORDS);
-	string theWord = WORDS[choice][WORD];
-	string theHint = WORDS[choice][HINT];
-
-	string jumble = theWord;
-	int length = jumble.size();
-	for (int i = 0; i < length; i++)
-	{
-		int index1 = rand() % length;
-		int index2 = rand() % length;
-		char temp = jumble[index1];
-		jumble[index1] = jumble[index2];
-		jumble[index2] = temp;
+		cout << inventory[i] << endl;
 	}
-
-	cout << "\t\t\tWelcome to Word Jumble!\n\n";
-	cout << "Unscramble the letters to make a word.\n";
-	cout << "Enter 'hint' for a hint.\n";
-	cout << "Enter 'quit' to quiet the game.\n\n";
-	cout << "The jumble is: " << jumble;
-	string guess;
-	cout << "\n\nYour guess: ";
-	cin >> guess;
-
-	while ((guess != theWord) && (guess != "quit"))
+	cout << "\nYou trade your sword for a battle axe.";
+	inventory[0] = "battle axe";
+	cout << "\nYpur items:\n";
+	for (unsigned int i = 0; i < inventory.size(); i++)
 	{
-		if (guess == "hint")
-		{
-			cout << "theHint";
-		}
-		else
-		{
-			cout << "Sorry, that's not it.";
-		}
-		cout << "\n\nYour guess: ";
-		cin >> guess;
+		cout << inventory[i] << endl;
 	}
-
-	if (guess == theWord)
+	cout << "\nThe item name '" << inventory[0] << "' has ";
+	cout << inventory[0].size() << " letters in it.\n";
+	cout << "\nYour shield is destroyed in a fierce battle.";
+	inventory.pop_back();
+	cout << "\nYour items:\n";
+	for (unsigned int i = 0; i < inventory.size(); i++)
 	{
-		cout << "\nThat's it! You guessed it!\n";
+		cout << inventory[i] << endl;
 	}
-	cout << "\nTHanks for playing.\n";
+	cout << "\nYou were robbed of all of your possessions by a thief.";
+	inventory.clear();
+	if (inventory.empty())
+	{
+		cout << "\nYou have nothing.\n";
+	}
+	else
+	{
+		cout << "\nYou have at least one item.\n";
+	}
 
 	return 0;
 }
