@@ -1,37 +1,27 @@
 ﻿#include <iostream>
-
+#include <string>
+#include <vector>
 using namespace std;
-void badSwap(int x, int y);
-void goodSwap(int& x, int& y);
+// параметр vec - это константная ссылка на вектор строк
+void display(const vector<string>& inventory);
 
 int main()
 {
-	int myScore = 150;
-	int yourScore = 1000;
-	cout << "Original values\n";
-	cout << "myScore: " << myScore << "\n";
-	cout << "yourScore: " << yourScore << "\n\n";
-	cout << "Calling badSwap()\n";
-	badSwap(myScore, yourScore);
-	cout << "myScore: " << myScore << "\n";
-	cout << "yourScore: " << yourScore << "\n\n";
-	cout << "Calling goodSwap()\n";
-	goodSwap(myScore, yourScore);
-	cout << "myScore: " << myScore << "\n";
-	cout << "yourScore: " << yourScore << "\n";
+	vector<string> inventory;
+	inventory.push_back("sword");
+	inventory.push_back("armor");
+	inventory.push_back("shield");
+	display(inventory);
 	return 0;
 }
-void badSwap(int x, int y)
+// параметр vec - это константная ссылка на вектор строк
+void display(const vector<string>& vec)
 {
-	int temp = x;
-	x = y;
-	y = temp;
-}
-void goodSwap(int& x, int& y)
-{
-	int temp = x;
-	x = y;
-	y = temp;
+	cout << "Your items:\n";
+	for (vector<string>::const_iterator iter = vec.begin(); iter != vec.end(); ++iter)
+	{
+		cout << *iter << endl;
+	}
 }
 
 /*
