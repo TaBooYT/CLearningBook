@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 using namespace std;
-// параметр vec - это константная ссылка на вектор строк
-void display(const vector<string>& inventory);
+// возвращает ссылку на строку
+string& refToElement(vector<string>& inventory, int i);
 
 int main()
 {
@@ -11,17 +11,30 @@ int main()
 	inventory.push_back("sword");
 	inventory.push_back("armor");
 	inventory.push_back("shield");
-	display(inventory);
+	// отображается строка. на которую указывает возвращенная ссылка
+	cout << "Sending the returned reference to cout:\n";
+	cout << refToElement(inventory, 0) << "\n\n";
+	// присвает одну ссылку другой - малозатратная операция присвания
+	cout << "Assigning the returned reference to another reference.\n";
+	string& rStr = refToElement(inventory, 1);
+	cout << "Sending the new reference to cout:\n";
+	cout << rStr << "\n\n";
+	// копирует строковый объект - затратная операция присваивания
+	cout << "Assigning the returned reference to a string odject.\n";
+	string str = refToElement(inventory, 2);
+	cout << "Sending the new string object to cout:\n";
+	cout << str << "\n\n";
+	// изменение строкового объекта посредством возвращенной ссылки
+	cout << "Altering an object through a returned reference.\n";
+	rStr = "Healing Potion";
+	cout << "Sending the altered object to cout:\n";
+	cout << inventory[1] << endl;
 	return 0;
 }
-// параметр vec - это константная ссылка на вектор строк
-void display(const vector<string>& vec)
+// возвращает ссылку на строку
+string& refToElement(vector<string>& vec, int i)
 {
-	cout << "Your items:\n";
-	for (vector<string>::const_iterator iter = vec.begin(); iter != vec.end(); ++iter)
-	{
-		cout << *iter << endl;
-	}
+	return vec[i];
 }
 
 /*
