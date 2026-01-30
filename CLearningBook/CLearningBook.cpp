@@ -1,44 +1,40 @@
 ﻿#include <iostream>
-#include <string>
-#include <vector>
 
 using namespace std;
-// возвращает указатель на строковый элемент
-string* ptrToElement(vector<string>* const pVec, int i);
+void increase(int* const array, const int NUM_ELEMENTS);
+void display(const int* const array, const int NUM_ELEMENTS);
 
 int main()
 {
-	vector<string> inventory;
-	inventory.push_back("sword");
-	inventory.push_back("armor");
-	inventory.push_back("shield");
-	// отображает строковый элемент, на который направлен возвращенный указатель
-	cout << "Sending the object pointer to by returned pointer to cout:\n";
-	cout << *(ptrToElement(&inventory, 0)) << "\n\n";
-	// присваивает один указатель другому - малозатратная операция
-	cout << "Assigning the returned pointer to another pointer.\n";
-	string* pStr = ptrToElement(&inventory, 1);
-	cout << "Sending the object pointed to by new pointer to cout:\n";
-	cout << *pStr << "\n\n";
-	// копирует строковый объект - затратная операция присваивания
-	cout << "Assigning object pointed to by pointer to a string object.\n";
-	string str = *(ptrToElement(&inventory, 2));
-	cout << "Sending the new string object to cout:\n";
-	cout << str << "\n\n";
-	// изменение строкового объекта посредством возвращенного указателя
-	cout << "Altering an object through a returned pointer.\n";
-	*pStr = "Healing Potion";
-	cout << "Sending the altered object to cout:\n";
-	cout << inventory[1] << endl;
+	cout << "Creating an array of high scores.\n\n";
+	const int NUM_SCORES = 3;
+	int highScores[NUM_SCORES] = { 5000, 3500, 2700 };
+	cout << "Displaying scores using array name as a constant pointer.\n";
+	cout << *highScores << endl;
+	cout << *(highScores + 1) << endl;
+	cout << *(highScores + 2) << endl;
+	cout << "Increasing scored by passing array as a constant pointer.\n\n";
+	increase(highScores, NUM_SCORES);
+	cout << "Displaying scored by passing array as a constant pointer to a constant.\n";
+	display(highScores, NUM_SCORES);
 
 	return 0;
 }
-string* ptrToElement(vector<string>* const pVec, int i)
+void increase(int* const array, const int NUM_ELEMENTS)
 {
-	// возвращает адрес строкового объекта, расположенного на позиции i
-	// в том векторе, на который направлен указатель pVec
-	return &((*pVec)[i]);
+	for (int i = 0; i < NUM_ELEMENTS; i++)
+	{
+		array[i] += 500;
+	}
 }
+void display(const int* const array, const int NUM_ELEMENTS)
+{
+	for (int i = 0; i < NUM_ELEMENTS; i++)
+	{
+		cout << array[i] << endl;
+	}
+}
+
 
 /*
 e:
