@@ -1,39 +1,31 @@
 ﻿#include <iostream>
 
 using namespace std;
-void increase(int* const array, const int NUM_ELEMENTS);
-void display(const int* const array, const int NUM_ELEMENTS);
+
+class Critter
+{
+public:
+	int m_Hunger; // определение голода
+	void Greet(); // прототип члена функции
+};
+void Critter::Greet()
+{
+	cout << "Hi, I'm a critter. My hunger level is " << m_Hunger << ".\n";
+}
 
 int main()
 {
-	cout << "Creating an array of high scores.\n\n";
-	const int NUM_SCORES = 3;
-	int highScores[NUM_SCORES] = { 5000, 3500, 2700 };
-	cout << "Displaying scores using array name as a constant pointer.\n";
-	cout << *highScores << endl;
-	cout << *(highScores + 1) << endl;
-	cout << *(highScores + 2) << endl;
-	cout << "Increasing scored by passing array as a constant pointer.\n\n";
-	increase(highScores, NUM_SCORES);
-	cout << "Displaying scored by passing array as a constant pointer to a constant.\n";
-	display(highScores, NUM_SCORES);
-
+	Critter crit1;
+	Critter crit2;
+	crit1.m_Hunger = 9;
+	cout << "crit1's hunger level is " << crit1.m_Hunger << ".\n";
+	crit2.m_Hunger = 3;
+	cout << "crit2's hunger level is " << crit2.m_Hunger << ".\n";
+	crit1.Greet();
+	crit2.Greet();
 	return 0;
 }
-void increase(int* const array, const int NUM_ELEMENTS)
-{
-	for (int i = 0; i < NUM_ELEMENTS; i++)
-	{
-		array[i] += 500;
-	}
-}
-void display(const int* const array, const int NUM_ELEMENTS)
-{
-	for (int i = 0; i < NUM_ELEMENTS; i++)
-	{
-		cout << array[i] << endl;
-	}
-}
+
 
 
 /*
