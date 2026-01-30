@@ -1,46 +1,44 @@
 ﻿#include <iostream>
-#include <string>
 
 using namespace std;
+void badSwap(int x, int y);
+void goodSwap(int* const pX, int* const pY);
 
 int main()
 {
-	int* pAPointer; // объявляем указатель
-	int* pScore = 0;
-	int score = 1000;
-	pScore = &score; // присваиваем указателю pScore адрес переменной score
-	cout << "Assigning &score to pScore\n";
-	cout << "&score is: " << &score << "\n"; // адрес переменной score
-	cout << "pScore is: " << pScore << "\n"; // адрес, сохраненный в указателе
-	cout << "score is: " << score << "\n";
-	cout << "*pScore is: " << *pScore << "\n\n"; // значение, на которое направлен указатель
-
-	cout << "Adding 500 to score\n";
-	score += 500;
-	cout << "score is: " << score << "\n";
-	cout << "*pScore is: " << *pScore << "\n\n";
-	cout << "Adding 500 to *pScore\n";
-	*pScore += 500;
-	cout << "score is: " << score << "\n";
-	cout << "*pScore is: " << *pScore << "\n\n";
-	cout << "Adding 500 to *pScore\n";
-	int newScore = 5000;
-	pScore = &newScore;
-	cout << "&newScore is: " << &newScore << "\n";
-	cout << "pScore is: " << pScore << "\n";
-	cout << "newScore is: " << newScore << "\n";
-	cout << "*pScore is: " << *pScore << "\n\n";
-	cout << "Assigning &str to pStr\n";
-	string str = "score";
-	string* pStr = &str; // указатель на строковый объект
-	cout << "str is: " << str << "\n";
-	cout << "*pStr is: " << *pStr << "\n";
-	cout << "(*pStr).size() is: " << (*pStr).size() << "\n";
-	cout << "pStr->size() is: " << pStr->size() << "\n";
-
+	int myScore = 150;
+	int yourScore = 1000;
+	cout << "Original values\n";
+	cout << "myScore: " << myScore << "\n";
+	cout << "yourScore: " << yourScore << "\n\n";
+	cout << "Calling badSwap()\n";
+	badSwap(myScore, yourScore);
+	cout << "myScore: " << myScore << "\n";
+	cout << "yourScore: " << yourScore << "\n\n";
+	cout << "Calling badSwap()\n";
+	goodSwap(&myScore, &yourScore);
+	cout << "myScore: " << myScore << "\n";
+	cout << "yourScore: " << yourScore << "\n\n";
 	return 0;
 }
 
+void badSwap(int x, int y)
+{
+	int temp = x;
+	x = y;
+	y = temp;
+}
+void goodSwap(int* const pX, int* const pY)
+{
+	// Сохраняем в temp значение, на которое указывает pX
+	int temp = *pX;
+	// сохраняем значение, на которое указывал pY
+	// по адресу, на который указывает pX
+	*pX = *pY;
+	// сохраняем значение, на которое изначально указывал pX,
+	// по адресу, на который указывает pY
+	*pY = temp;
+}
 
 /*
 e:
