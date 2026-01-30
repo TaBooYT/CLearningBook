@@ -1,43 +1,43 @@
 ﻿#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
-void badSwap(int x, int y);
-void goodSwap(int* const pX, int* const pY);
+// возвращает указатель на строковый элемент
+string* ptrToElement(vector<string>* const pVec, int i);
 
 int main()
 {
-	int myScore = 150;
-	int yourScore = 1000;
-	cout << "Original values\n";
-	cout << "myScore: " << myScore << "\n";
-	cout << "yourScore: " << yourScore << "\n\n";
-	cout << "Calling badSwap()\n";
-	badSwap(myScore, yourScore);
-	cout << "myScore: " << myScore << "\n";
-	cout << "yourScore: " << yourScore << "\n\n";
-	cout << "Calling badSwap()\n";
-	goodSwap(&myScore, &yourScore);
-	cout << "myScore: " << myScore << "\n";
-	cout << "yourScore: " << yourScore << "\n\n";
+	vector<string> inventory;
+	inventory.push_back("sword");
+	inventory.push_back("armor");
+	inventory.push_back("shield");
+	// отображает строковый элемент, на который направлен возвращенный указатель
+	cout << "Sending the object pointer to by returned pointer to cout:\n";
+	cout << *(ptrToElement(&inventory, 0)) << "\n\n";
+	// присваивает один указатель другому - малозатратная операция
+	cout << "Assigning the returned pointer to another pointer.\n";
+	string* pStr = ptrToElement(&inventory, 1);
+	cout << "Sending the object pointed to by new pointer to cout:\n";
+	cout << *pStr << "\n\n";
+	// копирует строковый объект - затратная операция присваивания
+	cout << "Assigning object pointed to by pointer to a string object.\n";
+	string str = *(ptrToElement(&inventory, 2));
+	cout << "Sending the new string object to cout:\n";
+	cout << str << "\n\n";
+	// изменение строкового объекта посредством возвращенного указателя
+	cout << "Altering an object through a returned pointer.\n";
+	*pStr = "Healing Potion";
+	cout << "Sending the altered object to cout:\n";
+	cout << inventory[1] << endl;
+
 	return 0;
 }
-
-void badSwap(int x, int y)
+string* ptrToElement(vector<string>* const pVec, int i)
 {
-	int temp = x;
-	x = y;
-	y = temp;
-}
-void goodSwap(int* const pX, int* const pY)
-{
-	// Сохраняем в temp значение, на которое указывает pX
-	int temp = *pX;
-	// сохраняем значение, на которое указывал pY
-	// по адресу, на который указывает pX
-	*pX = *pY;
-	// сохраняем значение, на которое изначально указывал pX,
-	// по адресу, на который указывает pY
-	*pY = temp;
+	// возвращает адрес строкового объекта, расположенного на позиции i
+	// в том векторе, на который направлен указатель pVec
+	return &((*pVec)[i]);
 }
 
 /*
