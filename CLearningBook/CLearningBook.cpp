@@ -4,44 +4,32 @@ using namespace std;
 
 class Critter
 {
-public: // начало открытого раздела
+public:
+	static int s_Total; // объявление статической переменной-члена
+	// Общее количество существующих объектов Critter
 	Critter(int hunger = 0);
-	int GetHunger() const;
-	void SetHunger(int hunger);
-private: // начало закрытого раздела 
+	static int GetTotal(); // прототип статической функции-члена
+private:
 	int m_Hunger;
 };
-Critter::Critter(int hunger):
-m_Hunger(hunger)
+int Critter::s_Total = 0; // инициализация статической переменной-члена
+Critter::Critter(int hunger) :m_Hunger(hunger)
 {
-	cout << "A new critter has been born!" << endl;
+	cout << "A critter has been born!" << endl;
+	++s_Total;
 }
-int Critter::GetHunger() const
+int Critter::GetTotal() // определение статической функции-член
 {
-	return m_Hunger;
-}
-void Critter::SetHunger(int hunger)
-{
-	if (hunger < 0)
-	{
-		cout << "You can't set a critter's hunger to a negative number.\n\n";
-	}
-	else
-	{
-		m_Hunger = hunger;
-	}
+	return s_Total;
 }
 
 int main()
 {
-	Critter crit(5);
-	//cout << crit.m_Hunger; // недопустимо, член m_Hunger является закрытым!
-	cout << "Calling GetHunger();" << crit.GetHunger() << "\n\n";
-	cout << "Calling SetHunger(); with -1.\n";
-	crit.SetHunger(-1);
-	cout << "Calling SetHunger() with 9.\n";
-	crit.SetHunger(9);
-	cout << "Calling GetHunger(): " << crit.GetHunger() << "\n\n";
+	cout << "The total number of critters is: ";
+	cout << Critter::s_Total << "\n\n";
+	Critter crit1, crit2, crit3;
+	cout << "\nThe total number of critter is: ";
+	cout << Critter::GetTotal() << "\n";
 	return 0;
 }
 
