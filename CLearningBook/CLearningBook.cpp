@@ -5,9 +5,15 @@ using namespace std;
 class Critter
 {
 public:
-	int m_Hunger; // определение голода
-	void Greet(); // прототип члена функции
+	int m_Hunger;
+	Critter(int hunger = 0);
+	void Greet();
 };
+Critter::Critter(int hunger)
+{
+	cout << "A new critter has been born!" << endl;
+	m_Hunger = hunger;
+}
 void Critter::Greet()
 {
 	cout << "Hi, I'm a critter. My hunger level is " << m_Hunger << ".\n";
@@ -15,14 +21,8 @@ void Critter::Greet()
 
 int main()
 {
-	Critter crit1;
-	Critter crit2;
-	crit1.m_Hunger = 9;
-	cout << "crit1's hunger level is " << crit1.m_Hunger << ".\n";
-	crit2.m_Hunger = 3;
-	cout << "crit2's hunger level is " << crit2.m_Hunger << ".\n";
-	crit1.Greet();
-	crit2.Greet();
+	Critter crit(7);
+	crit.Greet();
 	return 0;
 }
 
